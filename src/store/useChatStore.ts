@@ -3,24 +3,34 @@ import { Mensaje } from "../types/mensaje";
 
 type EstadoChat = {
     messages: Mensaje[];
+    carrito: number[];
     agregarMensaje: (mensaje: Mensaje) => void;
+    agregarAlCarrito: (productoId: number) => void;
+    removerDelCarrito: (productoId: number) => void;
+    vaciarCarrito: () => void;
 }
 
-
 export const useChatStore = create<EstadoChat>((set) => ({
-    // Estado inicial del chat - IndexVentanaChat.tsx
     messages: [
         {
             id: 1,
             rol: "bot",
-            texto: "Hola, soy un bot de IA. ¿En qué puedo ayudarte?",
+            texto: "¡Hola! Soy tu asistente de ventas. ¿Buscas algún producto en particular?",
         },
-    ], 
+    ],
+    carrito: [],
     agregarMensaje: (mensaje) => 
         set((state) => ({ 
-            messages: [
-                ...state.messages, mensaje
-            ] 
+            messages: [...state.messages, mensaje] 
         })),
-
-}))
+    agregarAlCarrito: (productoId) => 
+        set((state) => ({ 
+            carrito: [...state.carrito, productoId] 
+        })),
+    removerDelCarrito: (productoId) => 
+        set((state) => ({ 
+            carrito: state.carrito.filter(id => id !== productoId) 
+        })),
+    vaciarCarrito: () => 
+        set({ carrito: [] }),
+}));
