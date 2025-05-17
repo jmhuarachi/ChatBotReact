@@ -149,6 +149,7 @@ export default function IndexVentanaChat() {
                   </div>
                 )}
               </div>
+              
             ))
           )}
 
@@ -195,6 +196,8 @@ export default function IndexVentanaChat() {
             >
               <Send className="h-5 w-5" />
             </button>
+            
+
           </form>
 
           <button
